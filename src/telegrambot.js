@@ -111,21 +111,22 @@ module.exports = class TelegramBot {
                     });
 
                 apiaiRequest.on('response', (response) => {
-                    var afisha;
+
                     request(afishaUrl, function (error, response, body) {
                         if (!error) {
                             var $ = cheerio.load(body);
-                            afisha = $('#schedule .object .usetags').text();
-                            console.log("Температура " + afisha + " градусов по Фаренгейту.");
+                            var afisha = $('#schedule .object .usetags').text();
+                            this.reply({
+                                chat_id: chatId,
+                                text: afisha
+                            });
+                            console.log("Афиша " + afisha);
                         } else {
                             console.log("Произошла ошибка: " + error);
                         }
                     });
 
-                    this.reply({
-                        chat_id: chatId,
-                        text: afisha
-                    });
+
 
                     if (TelegramBot.isDefined(response.result)) {
                         let responseText = response.result.fulfillment.speech;
