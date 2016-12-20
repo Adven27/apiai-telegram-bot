@@ -3,6 +3,7 @@
 const apiai = require('apiai');
 const uuid = require('node-uuid');
 const request = require('request');
+const syncRequest = require('sync-request');
 
 const cheerio = require("cheerio");
 const afishaUrl = "http://www.afisha.ru/vologda/schedule_cinema/";
@@ -112,21 +113,12 @@ module.exports = class TelegramBot {
 
                 apiaiRequest.on('response', (response) => {
 
-                    /*request(afishaUrl, function (error, response, body) {
-                        if (!error) {
-                            var $ = cheerio.load(body);
-                            var afisha = $('#schedule .object .usetags').text();
-
-                            console.log("����� " + afisha);
-                        } else {
-                            console.log("��������� ������: " + error);
-                        }
-                    });*/
-
+                    var $ = cheerio.load(syncRequest('GET', afishaUrl).getBody());
+                    var afisha = $('#schedule .object .usetags').text();
 
                     this.reply({
                         chat_id: chatId,
-                        text: this._botConfig.devConfig
+                        text: afisha
                     });
 
                     if (TelegramBot.isDefined(response.result)) {
