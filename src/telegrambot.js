@@ -112,21 +112,22 @@ module.exports = class TelegramBot {
 
                 apiaiRequest.on('response', (response) => {
 
-                    request(afishaUrl, function (error, response, body) {
+                    /*request(afishaUrl, function (error, response, body) {
                         if (!error) {
                             var $ = cheerio.load(body);
                             var afisha = $('#schedule .object .usetags').text();
-                            this.reply({
-                                chat_id: chatId,
-                                text: afisha
-                            });
-                            console.log("Афиша " + afisha);
+
+                            console.log("пїЅпїЅпїЅпїЅпїЅ " + afisha);
                         } else {
-                            console.log("Произошла ошибка: " + error);
+                            console.log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: " + error);
                         }
+                    });*/
+
+
+                    this.reply({
+                        chat_id: chatId,
+                        text: this._botConfig.devConfig
                     });
-
-
 
                     if (TelegramBot.isDefined(response.result)) {
                         let responseText = response.result.fulfillment.speech;
