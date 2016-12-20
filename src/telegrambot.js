@@ -110,7 +110,7 @@ module.exports = class TelegramBot {
                 apiaiRequest.on('response', (response) => {
                     this.reply({
                         chat_id: chatId,
-                        text: "LALALALA"
+                        text: response.result
                     });
                     if (TelegramBot.isDefined(response.result)) {
                         let responseText = response.result.fulfillment.speech;
