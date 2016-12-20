@@ -131,11 +131,19 @@ module.exports = class TelegramBot {
                             TelegramBot.createResponse(res, 200, 'Message processed');
 
                         } else {
+                            this.reply({
+                                chat_id: chatId,
+                                text: responseData
+                            });
                             console.log('Received empty speech');
                             TelegramBot.createResponse(res, 200, 'Received empty speech');
                         }
                     } else {
                         console.log('Received empty result');
+                        this.reply({
+                            chat_id: chatId,
+                            text: 'Received empty result'
+                        });
                         TelegramBot.createResponse(res, 200, 'Received empty result');
                     }
                 });
